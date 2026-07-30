@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Trust all proxies for Render/Heroku (so HTTPS works correctly)
+        $middleware->trustProxies(at: '*');
+
         // ลงทะเบียน Middleware ของคุณที่นี่ด้วย alias
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureUserRoleIs::class,
