@@ -25,18 +25,25 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy existing application directory contents
-COPY . /var/www/html
-
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Copy package files first to cache node_modules
+COPY package.json package-lock.json* vite.config.js ./
+RUN npm install
 
-# Install Node dependencies and build assets
-RUN npm install \
-    && npm run build
+# Copy composer files to cache vendor
+COPY composer.json composer.lock* ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+
+# Copy the rest of the application
+COPY . /var/www/html
+
+# Finish composer setup
+RUN composer dump-autoload --optimize
+
+# Build Vite assets
+RUN npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
