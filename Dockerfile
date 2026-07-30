@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-configure intl \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring zip exif pcntl gd intl
@@ -31,6 +33,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Install Node dependencies and build assets
+RUN npm install \
+    && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
