@@ -1,0 +1,5 @@
+<?php
+namespace App\Filament\Admin\Resources\Schools\Pages;
+use App\Filament\Admin\Resources\Schools\SchoolResource;
+use Filament\Resources\Pages\EditRecord;
+class EditSchool extends EditRecord { protected static string $resource = SchoolResource::class; }

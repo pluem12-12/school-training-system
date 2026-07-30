@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-primary: #6b21a8;
+        --color-primary-light: #9333ea;
+        --color-primary-dark: #581c87;
+        --color-accent: #d4a017;
+        --color-accent-light: #facc15;
+        --color-accent-dark: #a16207;
+        --color-success: #16a34a;
+        --color-danger: #dc2626;
+        --color-warning: #f59e0b;
+        --color-info: #2563eb;
+    }
+}
+
+@layer components {
+    /* Card styles */
+    .card {
+        @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300;
+    }
+    .card:hover {
+        @apply shadow-md;
+    }
+    .card-header {
+        @apply px-6 py-4 border-b border-gray-100;
+    }
+    .card-body {
+        @apply p-6;
+    }
+
+    /* Dashboard stat card */
+    .stat-card {
+        @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    }
+    .stat-card .stat-icon {
+        @apply w-12 h-12 rounded-xl flex items-center justify-center text-white;
+    }
+    .stat-card .stat-value {
+        @apply text-3xl font-bold text-gray-800 mt-3;
+    }
+    .stat-card .stat-label {
+        @apply text-sm text-gray-500 mt-1;
+    }
+
+    /* Badge styles */
+    .badge {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    }
+    .badge-success {
+        @apply bg-green-100 text-green-800;
+    }
+    .badge-warning {
+        @apply bg-yellow-100 text-yellow-800;
+    }
+    .badge-danger {
+        @apply bg-red-100 text-red-800;
+    }
+    .badge-info {
+        @apply bg-blue-100 text-blue-800;
+    }
+    .badge-purple {
+        @apply bg-purple-100 text-purple-800;
+    }
+
+    /* Button styles */
+    .btn {
+        @apply inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    }
+    .btn-primary {
+        @apply bg-custom-purple text-white hover:bg-custom-purple-700 focus:ring-custom-purple-500 shadow-sm;
+    }
+    .btn-accent {
+        @apply bg-custom-yellow text-white hover:bg-custom-yellow-700 focus:ring-custom-yellow-500 shadow-sm;
+    }
+    .btn-success {
+        @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 shadow-sm;
+    }
+    .btn-danger {
+        @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-sm;
+    }
+    .btn-outline {
+        @apply border-2 border-custom-purple text-custom-purple hover:bg-custom-purple hover:text-white;
+    }
+
+    /* Table styles */
+    .data-table {
+        @apply min-w-full divide-y divide-gray-200;
+    }
+    .data-table thead {
+        @apply bg-gradient-to-r from-custom-purple-50 to-purple-50;
+    }
+    .data-table th {
+        @apply px-6 py-3 text-left text-xs font-semibold text-custom-purple uppercase tracking-wider;
+    }
+    .data-table td {
+        @apply px-6 py-4 whitespace-nowrap text-sm text-gray-700;
+    }
+    .data-table tbody tr {
+        @apply hover:bg-purple-50/50 transition-colors;
+    }
+
+    /* Section header */
+    .section-title {
+        @apply text-lg font-bold text-custom-purple border-b-2 border-custom-yellow pb-2 mb-4 flex items-center gap-2;
+    }
+
+    /* Alert styles */
+    .alert {
+        @apply p-4 rounded-lg border;
+    }
+    .alert-success {
+        @apply bg-green-50 border-green-200 text-green-700;
+    }
+    .alert-warning {
+        @apply bg-yellow-50 border-yellow-200 text-yellow-700;
+    }
+    .alert-danger {
+        @apply bg-red-50 border-red-200 text-red-700;
+    }
+    .alert-info {
+        @apply bg-blue-50 border-blue-200 text-blue-700;
+    }
+}
+
+@layer utilities {
+    /* Gradient backgrounds */
+    .gradient-purple {
+        background: linear-gradient(135deg, #6b21a8 0%, #9333ea 100%);
+    }
+    .gradient-gold {
+        background: linear-gradient(135deg, #d4a017 0%, #facc15 100%);
+    }
+    .gradient-hero {
+        background: linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%);
+    }
+
+    /* Glass effect */
+    .glass {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Text gradient */
+    .text-gradient {
+        background: linear-gradient(135deg, #6b21a8, #d4a017);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+}

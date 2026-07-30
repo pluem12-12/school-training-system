@@ -1,0 +1,9 @@
+<?php
+namespace App\Filament\Admin\Resources\Schools\Pages;
+use App\Filament\Admin\Resources\Schools\SchoolResource;
+use Filament\Resources\Pages\ListRecords;
+class ListSchools extends ListRecords
+{
+    protected static string $resource = SchoolResource::class;
+    protected function getHeaderActions(): array { return [\Filament\Actions\CreateAction::make()]; }
+}
