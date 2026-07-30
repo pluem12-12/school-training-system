@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             SchoolSeeder::class,
+            AgencySeeder::class,
         ]);
     }
 }
