@@ -25,7 +25,7 @@ class RegisterOtpController extends Controller
         }
 
         return view('auth.verify-otp', [
-            'devOtp' => config('app.env') === 'local' ? session('registration_otp') : null
+            'devOtp' => session('registration_otp')
         ]);
     }
 
