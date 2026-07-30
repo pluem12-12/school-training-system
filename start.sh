@@ -9,5 +9,9 @@ php artisan filament:cache-components
 # Run migrations (we use --force because it's in production mode)
 php artisan migrate --force
 
+# Fix permissions for storage and bootstrap/cache (because running artisan as root might change ownership)
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Start Apache in foreground
 apache2-foreground
