@@ -40,6 +40,11 @@ class EvaluationQuestionsTable
             ->recordActions([
                 EditAction::make(),
             ])
+            ->headerActions([
+                \Filament\Tables\Actions\ImportAction::make()
+                    ->importer(\App\Filament\Imports\EvaluationQuestionImporter::class)
+                    ->label('นำเข้าหัวข้อ (Import)')
+            ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
