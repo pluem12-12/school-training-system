@@ -593,7 +593,7 @@
                     </div>
                 </div>
                 <div class="border-t border-white/20 mt-8 pt-8 text-center text-sm text-purple-300">
-                    © {{ date('Y') }} {{ $siteSetting->footer_copyright ?? 'ศูนย์ฝึกประสบการณ์วิชาชีพครู คณะครุศาสตร์ | พัฒนาโดยทีมพัฒนาระบบสารสนเทศ' }}
+                    © {{ date('Y') }} {{ $siteSetting->footer_copyright ?? 'ศูนย์ฝึกประสบการณ์วิชาชีพครู คณะครุศาสตร์ | พัฒนาโดยนายณัฐธพงษ์ เลิศอนันต์วิมล' }}
                 </div>
             </div>
         </footer>
