@@ -2,15 +2,15 @@
 
 namespace App\Filament\Admin\Resources\AboutContents\Schemas;
 
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 
 class AboutContentForm
 {
-    public static function configure(Form $form): Form
+    public static function configure(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                \Filament\Forms\Components\Section::make('เนื้อหาเกี่ยวกับศูนย์')
+                \Filament\Schemas\Components\Section::make('เนื้อหาเกี่ยวกับศูนย์')
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('title')
                             ->label('หัวข้อ')
@@ -23,7 +23,7 @@ class AboutContentForm
                             ->label('รายละเอียดส่วนที่ 2')
                             ->rows(4),
                     ]),
-                \Filament\Forms\Components\Section::make('รูปภาพประกอบ')
+                \Filament\Schemas\Components\Section::make('รูปภาพประกอบ')
                     ->schema([
                         \Filament\Forms\Components\FileUpload::make('image_1')
                             ->label('รูปภาพ 1')

@@ -10,7 +10,7 @@ use App\Filament\Admin\Resources\AboutContents\Tables\AboutContentsTable;
 use App\Models\AboutContent;
 use BackedEnum;
 use Filament\Resources\Resource;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
@@ -20,9 +20,9 @@ class AboutContentResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return AboutContentForm::configure($form);
+        return AboutContentForm::configure($schema);
     }
 
     public static function table(Table $table): Table
