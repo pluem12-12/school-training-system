@@ -25,12 +25,12 @@ class AttendanceController extends Controller
 
         // สถิติแบบ query เดียวเพื่อลดภาระฐานข้อมูล
         $attendanceStats = Attendance::where('student_id', $user->id)
-            ->selectRaw('
+            ->selectRaw("
                 count(*) as total_days,
-                sum(case when status = "present" then 1 else 0 end) as present_days,
-                sum(case when status = "absent" then 1 else 0 end) as absent_days,
-                sum(case when status = "late" then 1 else 0 end) as late_days
-            ')->first();
+                sum(case when status = 'present' then 1 else 0 end) as present_days,
+                sum(case when status = 'absent' then 1 else 0 end) as absent_days,
+                sum(case when status = 'late' then 1 else 0 end) as late_days
+            ")->first();
 
         $stats = [
             'total_days' => $attendanceStats->total_days ?? 0,
