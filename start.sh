@@ -6,6 +6,9 @@ php artisan route:cache
 php artisan view:cache
 php artisan filament:cache-components
 
+# Create storage symlink
+php artisan storage:link
+
 # Run migrations and seeders (we use --force because it's in production mode)
 php artisan migrate --force
 php artisan db:seed --force
