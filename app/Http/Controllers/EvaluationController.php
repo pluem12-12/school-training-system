@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evaluation;
+use App\Models\EvaluationQuestion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,14 +74,15 @@ class EvaluationController extends Controller
             return redirect()->route('evaluations.type')->with('error', 'กรุณาเริ่มขั้นตอนการประเมินใหม่');
         }
 
-        // Define mock evaluation questions
-        $questions = [
-            'q1' => '1. ความตรงต่อเวลาและความรับผิดชอบ',
-            'q2' => '2. การเตรียมแผนการจัดการเรียนรู้',
-            'q3' => '3. ทักษะการถ่ายทอดและการสอน',
-            'q4' => '4. การใช้สื่อและเทคโนโลยีประกอบการสอน',
-            'q5' => '5. การวัดและประเมินผลผู้เรียน',
-        ];
+        // Fetch dynamic questions from database
+        $questions = EvaluationQuestion::where('is_active', true)
+            ->orderBy('sort_order')
+            ->pluck('question_text', 'id')
+            ->toArray();
+
+        if (empty($questions)) {
+            return redirect()->route('dashboard')->with('error', 'ยังไม่มีการตั้งหัวข้อการประเมิน กรุณาติดต่อผู้ดูแลระบบ');
+        }
 
         return view('evaluations.form', compact('student', 'type', 'questions'));
     }
