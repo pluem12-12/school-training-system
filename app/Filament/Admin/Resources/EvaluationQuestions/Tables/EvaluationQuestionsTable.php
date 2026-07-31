@@ -41,7 +41,7 @@ class EvaluationQuestionsTable
                 EditAction::make(),
             ])
             ->headerActions([
-                \Filament\Tables\Actions\Action::make('import_excel')
+                \Filament\Actions\Action::make('import_excel')
                     ->label('นำเข้าหัวข้อ (Excel/CSV)')
                     ->icon('heroicon-o-arrow-up-tray')
                     ->form([
