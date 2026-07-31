@@ -41,7 +41,7 @@ class EvaluationQuestionsTable
                 EditAction::make(),
             ])
             ->headerActions([
-                \Filament\Tables\Actions\ImportAction::make()
+                \Filament\Actions\ImportAction::make()
                     ->importer(\App\Filament\Imports\EvaluationQuestionImporter::class)
                     ->label('นำเข้าหัวข้อ (Import)')
             ])
