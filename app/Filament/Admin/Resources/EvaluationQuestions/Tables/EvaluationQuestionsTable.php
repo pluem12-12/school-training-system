@@ -41,9 +41,35 @@ class EvaluationQuestionsTable
                 EditAction::make(),
             ])
             ->headerActions([
-                \Filament\Actions\ImportAction::make()
-                    ->importer(\App\Filament\Imports\EvaluationQuestionImporter::class)
-                    ->label('นำเข้าหัวข้อ (Import)')
+                \Filament\Tables\Actions\Action::make('import_excel')
+                    ->label('นำเข้าหัวข้อ (Excel/CSV)')
+                    ->icon('heroicon-o-arrow-up-tray')
+                    ->form([
+                        \Filament\Forms\Components\FileUpload::make('file')
+                            ->label('อัปโหลดไฟล์ (.xlsx, .xls, .csv)')
+                            ->required()
+                            ->acceptedFileTypes([
+                                'application/vnd.ms-excel',
+                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                'text/csv'
+                            ])
+                            ->storeFiles(false),
+                    ])
+                    ->action(function (array $data) {
+                        try {
+                            \Maatwebsite\Excel\Facades\Excel::import(new \App\Imports\EvaluationQuestionExcelImport, $data['file']);
+                            \Filament\Notifications\Notification::make()
+                                ->title('นำเข้าข้อมูลสำเร็จ')
+                                ->success()
+                                ->send();
+                        } catch (\Exception $e) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('เกิดข้อผิดพลาดในการนำเข้า')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    })
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
