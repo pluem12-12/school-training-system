@@ -13,10 +13,13 @@ class EvaluationTrendChart extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Evaluation::selectRaw('MONTH(created_at) as month, COUNT(*) as count, AVG(score) as average_score')
+        $isPgsql = \Illuminate\Support\Facades\DB::connection()->getDriverName() === 'pgsql';
+        $monthQuery = $isPgsql ? 'EXTRACT(MONTH FROM created_at)' : 'MONTH(created_at)';
+        
+        $data = Evaluation::selectRaw("{$monthQuery} as month, COUNT(*) as count, AVG(score) as average_score")
             ->whereYear('created_at', Carbon::now()->year)
-            ->groupBy('month')
-            ->orderBy('month')
+            ->groupByRaw($monthQuery)
+            ->orderByRaw($monthQuery)
             ->get();
             
         $months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
