@@ -9,9 +9,17 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\MemberProfile;
 use App\Models\School; // เพิ่มบรรทัดนี้
 
-class User extends Authenticatable
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+
+class User extends Authenticatable implements FilamentUser
 {
     use HasFactory, Notifiable;
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === 'admin';
+    }
 
     protected $fillable = [
         'name',
